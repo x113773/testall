@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
-public class yamlTest {
+public class YamlTest {
 	public void loadYaml() throws FileNotFoundException {
 		Yaml yaml = new Yaml();
 		File f = new File("test.yaml");

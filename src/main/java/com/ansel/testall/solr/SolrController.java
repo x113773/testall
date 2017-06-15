@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class solrController {
+public class SolrController {
 	@RequestMapping(value = "/solr", method = RequestMethod.GET)
 	public void getSolr() throws SolrServerException, IOException {
 
