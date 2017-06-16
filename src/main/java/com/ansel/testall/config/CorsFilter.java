@@ -1,4 +1,4 @@
-package com.ansel.testall.cors;
+package com.ansel.testall.config;
 
 import java.io.IOException;
 
