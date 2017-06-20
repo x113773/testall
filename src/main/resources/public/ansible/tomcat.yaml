@@ -1,0 +1,17 @@
+---
+- hosts: all
+
+  tasks:
+  - name: stop tomcat service
+    script: "/etc/ansible/shutdown_tomcat.sh"
+
+  - name: remove old war file
+    shell: cd {{ tomcat }}webapps&&rm -rf {{ item }} {{ item }}.war
+    with_items: "{{ project_name_arr }}"
+
+  - name: copy new war file
+    copy: src={{ local_war_path }}{{ item }}.war dest={{ tomcat }}webapps/
+    with_items: "{{ project_name_arr }}"
+
+  - name: start tomcat service
+    shell: chdir={{ tomcat }}bin/ nohup ./startup.sh &
