@@ -23,6 +23,7 @@ public class AnsibleHelper {
 	 *            playbookParamMap.put("project_name_arr",
 	 *            字符串数组格式的项目（war包）名，不带.war后缀});
 	 *            playbookParamMap.put("tomcat","目标主机tomcat路径，到tomcat/主目录为止");
+	 *            -----------------------------------------------------------------
 	 *            若为weblogic部署，该参数需要提供如下几个键值对：
 	 *            playbookParamMap.put("user_name","目标主机weblogic用户名");
 	 *            playbookParamMap.put("password", "目标主机weblogic密码");

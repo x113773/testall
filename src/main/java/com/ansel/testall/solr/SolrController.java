@@ -27,11 +27,4 @@ public class SolrController {
 		UpdateResponse rsp = req.process(client);
 		System.out.println(rsp);
 	}
-	@RequestMapping(value = "/solr2", method = RequestMethod.GET)
-	public void getSolr2() throws SolrServerException, IOException {
-
-		String urlString = "http://192.168.10.129:8983/solr/mycore";
-		SolrClient client = new HttpSolrClient.Builder(urlString).build();
-		client.commit();
-	}
 }

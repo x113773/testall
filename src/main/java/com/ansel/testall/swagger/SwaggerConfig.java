@@ -28,7 +28,7 @@ public class SwaggerConfig {
 
 	 private ApiInfo testApiInfo() {
 	        return new ApiInfoBuilder()
-	            .title("大标题大标题大标题")//大标题
+	            .title("大标题大标题大标题aaa")//大标题
 	            .description("详细描述详细描述")//详细描述
 	            .version("1.0版本版本")//版本
 	            .termsOfServiceUrl("NO terms of service")
