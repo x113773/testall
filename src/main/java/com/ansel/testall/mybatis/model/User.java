@@ -1,4 +1,4 @@
-package com.ansel.testall.swagger;
+package com.ansel.testall.mybatis.model;
 
 
 public class User {

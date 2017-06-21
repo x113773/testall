@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ansel.testall.mybatis.model.Error400;
+import com.ansel.testall.mybatis.model.User;
+
 
 @RestController
 public class SwaggerController {

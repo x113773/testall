@@ -1,4 +1,4 @@
-package com.ansel.testall.config;
+package com.ansel.testall.cors;
 
 import java.util.List;
 
