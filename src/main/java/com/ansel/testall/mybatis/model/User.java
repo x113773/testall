@@ -2,33 +2,33 @@ package com.ansel.testall.mybatis.model;
 
 
 public class User {
-	private String userId;
+    private Integer userId;
 
-	private String password;
+    private String userName;
 
-	private String userName;
+    private String userPassword;
 
-	public String getUserId() {
-		return userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserPassword() {
+        return userPassword;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
 }
