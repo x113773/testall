@@ -17,14 +17,16 @@ public class SolrController {
 	@RequestMapping(value = "/solr", method = RequestMethod.GET)
 	public void getSolr() throws SolrServerException, IOException {
 
-		String urlString = "http://192.168.10.129:8983/solr/mycore";
+		String urlString = "http://192.168.52.128:8983/solr/mycore1";
 		SolrClient client = new HttpSolrClient.Builder(urlString).build();
 		SolrInputDocument doc = new SolrInputDocument();
-		doc.addField("id", "c");
-		UpdateRequest req = new UpdateRequest();
-		req.setAction(UpdateRequest.ACTION.COMMIT, false, false);
-		req.add(doc);
-		UpdateResponse rsp = req.process(client);
-		System.out.println(rsp);
+		doc.addField("id", "2");
+//		UpdateRequest req = new UpdateRequest();
+//		req.setAction(UpdateRequest.ACTION.COMMIT, false, false);
+//		req.add(doc);
+//		UpdateResponse rsp = req.process(client);
+//		System.out.println(rsp);
+		client.add(doc);
+		client.commit();
 	}
 }
