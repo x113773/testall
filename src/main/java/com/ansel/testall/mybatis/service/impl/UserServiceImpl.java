@@ -22,10 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertSelective(User user) {
-		userMapper.insertSelective(user);
-		Integer a = null;
-		//a.toString();
-		return 1;
+		return userMapper.insertSelective(user);
 	}
 
 	@Override

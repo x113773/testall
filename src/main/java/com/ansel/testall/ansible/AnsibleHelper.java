@@ -52,7 +52,7 @@ public class AnsibleHelper {
 		hostsSb.append(" ansible_ssh_user=").append(ansibleSettingsMap.get("ansible_ssh_user"));
 		hostsSb.append(" ansible_ssh_pass=").append(ansibleSettingsMap.get("ansible_ssh_pass"));
 		hostsSb.append(" #host_to_replace");
-		FileContentReplaceHelper.Modify("/etc/ansible/hosts", "#host_to_replace", hostsSb.toString());
+		FileContentReplaceHelper.Modify(ansibleSettingsMap.get("ansible_ssh_hosts_path").toString(), "#host_to_replace", hostsSb.toString());
 	}
 
 	private static String doAnisblePlaybook(Map<String, Object> playbookParamMap, String playbookPath) {

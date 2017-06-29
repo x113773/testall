@@ -1,7 +1,10 @@
 package com.ansel.testall.mybatis.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.ansel.testall.mybatis.model.User;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
