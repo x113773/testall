@@ -2,7 +2,7 @@
 
 ## 打算把用到过的和学习过的，所有前后端技术都集成到这个项目里，并在issues里配以介绍说明，以备以后使用。
 
-已包含的技术功能点：
+已包含的技术功能点（下面的名称为代码链接）：
 
 - [Spring Boot](https://github.com/x113773/testall/blob/master/src/main/java/com/ansel/testall/Application.java)
 这个项目就是就是基于Spring Boot框架；
@@ -21,3 +21,11 @@ Springboot开启https协议，详见[这里](https://github.com/x113773/testall/
 
 - [MyBatis](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/mybatis)
 Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x113773/testall/issues/9)
+
+- [SnakeYAML](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/snakeyaml)
+可以实现对YAML进行读写操作
+
+- [Solr](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/solr)
+通过solrj对solr进行一些操作（持续更新中），相关文档说明：
+[Solr6.6 创建core](https://github.com/x113773/testall/issues/7)
+[Solr6.6 Tomcat8部署](https://github.com/x113773/testall/issues/6)
