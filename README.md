@@ -15,3 +15,9 @@
  
 - [CORS](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/cors)
 跨域资源共享，这里是Springboot开启全局支持CORS的配置，什么是CORS，请看[这里](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+
+- [HTTPS](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/https)
+Springboot开启https协议，详见[这里](https://github.com/x113773/testall/issues/1)
+
+- [MyBatis](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/mybatis)
+Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x113773/testall/issues/9)
