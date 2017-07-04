@@ -27,5 +27,5 @@ Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x1137
 
 - [Solr](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/solr)
 通过solrj对solr进行一些操作（持续更新中），相关文档说明：
-[Solr6.6 创建core](https://github.com/x113773/testall/issues/7)
-[Solr6.6 Tomcat8部署](https://github.com/x113773/testall/issues/6)
+ - [Solr6.6 创建core](https://github.com/x113773/testall/issues/7)
+ - [Solr6.6 Tomcat8部署](https://github.com/x113773/testall/issues/6)
