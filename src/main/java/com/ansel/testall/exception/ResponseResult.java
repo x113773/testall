@@ -1,4 +1,4 @@
-package com.ansel.testall.mybatis.model;
+package com.ansel.testall.exception;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,6 +17,8 @@ public class ResponseResult {
 	@ApiModelProperty(value = "反馈描述")
 	private String respDesc;
 
+	private String reqUrl;
+
 	public String getRespCode() {
 		return respCode;
 	}
@@ -31,6 +33,14 @@ public class ResponseResult {
 
 	public void setRespDesc(String respDesc) {
 		this.respDesc = respDesc;
+	}
+
+	public String getReqUrl() {
+		return reqUrl;
+	}
+
+	public void setReqUrl(String reqUrl) {
+		this.reqUrl = reqUrl;
 	}
 
 }

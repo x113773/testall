@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ansel.testall.mybatis.model.ResponseResult;
+import com.ansel.testall.exception.ResponseResult;
 import com.ansel.testall.mybatis.model.User;
 import com.ansel.testall.mybatis.service.UserService;
 
