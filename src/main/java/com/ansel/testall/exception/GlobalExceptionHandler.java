@@ -15,8 +15,8 @@ public class GlobalExceptionHandler {
 		ResponseResult rr = new ResponseResult();
 		rr.setReqUrl(req.getRequestURL().toString());
 		rr.setRespCode("500");
-		rr.setRespDesc(e.getMessage());
+		rr.setRespDesc(e + ":" + e.getMessage());
+		e.printStackTrace();
 		return rr;
 	}
-
 }

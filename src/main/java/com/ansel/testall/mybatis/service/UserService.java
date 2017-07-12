@@ -8,4 +8,6 @@ public interface UserService {
 	int insertSelective(User user);
 
 	User getUserById(Integer userId);
+
+	User getUserByUsername(String username);
 }
