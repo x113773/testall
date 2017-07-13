@@ -62,7 +62,7 @@
 					},
 
 					submitHandler : function(form) {
-						var rse = $.ajax({
+					     $.ajax({
 							url : "/login",
 							type : "POST",
 							data : "username=" + $("#username").val() + "&password=" + $("#password").val() + "&validateCode=" + $("#validateCode").val() + "&rememberMe=" + $("#rememberMe").val(),

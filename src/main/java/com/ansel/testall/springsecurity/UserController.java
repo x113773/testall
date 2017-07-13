@@ -36,6 +36,13 @@ public class UserController {
 
 	}
 
+	/**
+	 * 如果是访问受限页面后，跳转到登录页的，则在targetUrl保存之前受限页面的路径，供页面调用
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/login/success", method = RequestMethod.GET)
 	public Map<String, Object> loginSuccess(HttpServletRequest request, HttpServletResponse response) {
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -49,6 +56,12 @@ public class UserController {
 		return result;
 	}
 
+	/**
+	 * 获取异常信息返回给页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/login/failure", method = RequestMethod.GET)
 	public Map<String, Object> loginFailure(HttpServletRequest request, HttpServletResponse response) {
 		AuthenticationException ae = (AuthenticationException) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
@@ -101,7 +114,7 @@ public class UserController {
 		result.put("message", "This message is only visible to the admin");
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/user/account", method = RequestMethod.GET)
 	public Map<String, Object> getUserAcctunt(HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<String, Object>();

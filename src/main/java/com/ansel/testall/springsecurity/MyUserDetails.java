@@ -69,6 +69,4 @@ public class MyUserDetails implements UserDetails{
                 + ", password=" + password + ", enabled=" + enabled  
                 + ", authorities=" + authorities + "]";  
     }  
-  
-  
 }  
