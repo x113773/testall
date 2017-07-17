@@ -66,16 +66,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// 添加验证码验证
 				.addFilterAt(myUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).exceptionHandling()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login_page")).and()
-				//.addFilterAt(rememberMeAuthenticationFilter(), RememberMeAuthenticationFilter.class)
+				.addFilterAt(rememberMeAuthenticationFilter(), RememberMeAuthenticationFilter.class)
 				// 指定登录页面的请求路径
 				.formLogin().loginPage("/login_page")
 				// 登陆处理路径
 				.loginProcessingUrl("/login").permitAll().and()
 				// 退出请求的默认路径为logout，下面改为signout，
 				// 成功退出登录后的url可以用logoutSuccessUrl设置
-				.logout().logoutUrl("/signout").logoutSuccessUrl("/login_page").permitAll().and()
+				.logout().deleteCookies("remember-me").logoutUrl("/signout").logoutSuccessUrl("/login_page").permitAll().and()
 				// 开启rememberMe，设置一个私钥专供testall项目使用，注意与下面TokenBasedRememberMeServices的key保持一致
-				 .rememberMe().key("testallKey").and()
+				// .rememberMe().key("testallKey").and()
 				// 关闭csrf
 				.csrf().disable();
 	}
@@ -118,6 +118,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		tbrms.setTokenValiditySeconds(60 * 60 * 24 * 2);
 		// 设置checkbox的参数名为rememberMe（默认为remember-me），注意如果是ajax请求，参数名不是checkbox的name而是在ajax的data里
 		tbrms.setParameter("rememberMe");
+		tbrms.setAlwaysRemember(false);
 		return tbrms;
 	}
 
