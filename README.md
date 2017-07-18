@@ -5,7 +5,7 @@
 已包含的技术功能点（下面的名称为代码链接）：
 
 - [Spring Boot](https://github.com/x113773/testall/blob/master/src/main/java/com/ansel/testall/Application.java)
-这个项目就是就是基于Spring Boot框架；
+这个项目就是就是基于Spring Boot框架的；
 
 - [Ansible](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/ansible)
 是一个自动化运维工具，可以实现批量系统配置、批量程序部署、批量运行命令等功能。这里的样例实现了如下功能：通过指定本机和目标主机（均为Linux）的一些配置信息，实现自动启停Tomcat、weblogic，并删除同名旧项目，部署新项目。具体的配置说明及实现说明，请看[这里](https://github.com/x113773/testall/issues/4)
@@ -29,6 +29,11 @@ Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x1137
 通过solrj对solr进行一些操作（持续更新中），相关文档说明：
   - [Solr6.6 创建core](https://github.com/x113773/testall/issues/7)
   - [Solr6.6 Tomcat8部署](https://github.com/x113773/testall/issues/6)
+
+- [Spring Security](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/springsecurity)
+没有使用xml而是使用Java config方式对Spring Security进行的配置，包括如下功能：
+  - [ajax登录，自定义验证](https://github.com/x113773/testall/issues/14)
+  - [Remember-Me](https://github.com/x113773/testall/issues/15)
 
 - [Swagger](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/swagger)
 是一款接口文档在线自动生成及测试软件(可以当postman用)，详细介绍见[这里](https://swagger.io/docs/specification/what-is-swagger/)，springboot集成实例见[这里](https://github.com/x113773/testall/issues/5)
