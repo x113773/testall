@@ -23,7 +23,7 @@ Springboot开启https协议，详见[这里](https://github.com/x113773/testall/
 Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x113773/testall/issues/9)
 
 - [Redis](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/redis/springdata)
-通过Spring Data Redis对Redis进行一些操作（持续更新中），相关文档说明：
+通过Spring Data Redis对Redis进行一些操作，相关文档说明：
   - [Redis4.0.0 安装及配置 （Linux — Centos7）](https://github.com/x113773/testall/issues/16)
   - [Spring Boot 1.5.4集成Redis](https://github.com/x113773/testall/issues/17)
   - [Spring Boot 使用Redis缓存](https://github.com/x113773/testall/issues/18)
