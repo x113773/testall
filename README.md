@@ -2,7 +2,7 @@
 
 ## 打算把用到过的和学习过的，所有前后端技术都集成到这个项目里，并在issues里配以介绍说明，以备以后使用。
 
-已包含的技术功能点（下面的名称为代码链接）：
+已包含的技术功能点（下面的技术名称为示例代码链接）：
 
 - [Spring Boot](https://github.com/x113773/testall/blob/master/src/main/java/com/ansel/testall/Application.java)
 这个项目就是就是基于Spring Boot框架的；
