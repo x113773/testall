@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/login/**").permitAll()
+		http.authorizeRequests().antMatchers("/**", "/login/**").permitAll()//为了测试其他功能，设置“ /** ”允许所有请求
 				// user权限可以访问的请求
 				.antMatchers("/security/user").hasRole("user")
 				// admin权限可以访问的请求
