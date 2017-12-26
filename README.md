@@ -2,7 +2,7 @@
 
 ## 打算把用到过的和学习过的，所有前后端技术都集成到这个项目里，并在issues里配以介绍说明，以备以后使用。
 
-已包含的技术功能点（下面的名称为代码链接）：
+已包含的技术功能点（下面的技术名称为示例代码链接）：
 
 - [Spring Boot](https://github.com/x113773/testall/blob/master/src/main/java/com/ansel/testall/Application.java)
 这个项目就是就是基于Spring Boot框架的；
@@ -22,6 +22,12 @@ Springboot开启https协议，详见[这里](https://github.com/x113773/testall/
 - [MyBatis](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/mybatis)
 Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x113773/testall/issues/9)
 
+- [Redis](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/redis/springdata)
+通过Spring Data Redis对Redis进行一些操作，相关文档说明：
+  - [Redis4.0.0 安装及配置 （Linux — Centos7）](https://github.com/x113773/testall/issues/16)
+  - [Spring Boot 1.5.4集成Redis](https://github.com/x113773/testall/issues/17)
+  - [Spring Boot 使用Redis缓存](https://github.com/x113773/testall/issues/18)
+  
 - [SnakeYAML](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/snakeyaml)
 可以实现对YAML进行读写操作
 
