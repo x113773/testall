@@ -32,7 +32,7 @@ public class JsonSchemaController {
 		JsonNode schemaNode = JsonSchemaValidator.getJsonNodeFromFile(filePath);
 		if (schemaNode == null) {
 			result.put("success", false);
-			result.put("message", "json Schema文件不存在，无法校验，请联系管理员！");
+			result.put("message", "json Schema文件不存在，无法校验！");
 			return result;
 		}
 		return JsonSchemaValidator.validateJsonByFgeByJsonNode(jsonNode, schemaNode);

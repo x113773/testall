@@ -12,38 +12,31 @@
 
 <!-- END HEAD -->
 <body class=" ">
-
-
 	<div>
 		<textarea class=" " name="parameterContentLeft" id="parameterContentLeft" placeholder="请输入请求报文内容"></textarea>
 	</div>
-
+	<br>
+	<button onclick="setAjaxRequest();" id="doJson" class=" ">发送</button>
 	<div class=" ">
 		<pre id="responsePre">
 
-
         </pre>
 	</div>
-	<br>
-	<button onclick="setAjaxRequest();" id="doJson" class=" ">发送</button>
-
-</body>
-<script src="frame/jquery.min.js"></script>
-<script>
-	function setAjaxRequest() {
-		$.ajax({
-			url : "/json-schema/validate",
-			type : "GET",
-			data : {
-				jsonStr : $("#parameterContentLeft").val()
-			},
-			async : false
-		}).done(function(data) {
-			$("#responsePre").html(data.message);
-		});
-	}
-</script>
-
+	<script src="frame/jquery.min.js"></script>
+	<script>
+		function setAjaxRequest() {
+			$.ajax({
+				url : "/json-schema/validate",
+				type : "GET",
+				data : {
+					jsonStr : $("#parameterContentLeft").val()
+				},
+				async : false
+			}).done(function(data) {
+				$("#responsePre").html(data.message);
+			});
+		}
+	</script>
 </body>
 
 </html>
