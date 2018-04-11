@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ansel.testall.mybatis.mapper.HanlinMapper">
+	<resultMap id="BaseResultMap" type="com.ansel.testall.mybatis.model.Hanlin">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+		<result column="thumb_up" jdbcType="INTEGER" property="thumbUp" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, title, url,thumb_up,CREATE_DATE
+	</sql>
+	<select id="selectByHanlin" parameterType="com.ansel.testall.mybatis.model.Hanlin"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Hanlin
+		<if test="title != null">
+			where title = #{title,jdbcType=VARCHAR}
+		</if>
+		order by thumb_up desc
+	</select>
+	<insert id="insertSelective" parameterType="com.ansel.testall.mybatis.model.Hanlin">
+		insert into Hanlin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="thumbUp != null">
+				thumb_up,
+			</if>
+			CREATE_DATE
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="thumbUp != null">
+				#{thumbUp,jdbcType=INTEGER},
+			</if>
+			sysdate
+		</trim>
+	</insert>
+
+</mapper>

@@ -38,7 +38,7 @@ public class LinkList {
 		}
 	}
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		Node head = null;
 		int[] a = { 1, 2, 3 };
 		head = topInsert(head, a);
@@ -46,5 +46,5 @@ public class LinkList {
 		System.out.println(" ");
 		head = tailInsert(head, a);
 		display(head);
-	}
+	}*/
 }

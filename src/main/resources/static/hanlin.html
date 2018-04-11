@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+</head>
+<body>
+	<h1>hello world!</h1>
+	<textarea rows="20" cols="200" id="content"></textarea>
+	<button id="doAjaxRequest">submit</button>
+	<br />
+	<br />
+	<div id="list" style="margin-left:311px;"></div>
+	<br />
+	<br />
+</body>
+<script src="frame/jquery.min.js"></script>
+<script type="text/javascript">
+	$("#doAjaxRequest").click(function() {
+		var content = $("#content").val();
+		var contentArr = content.split("-");
+		var hanlinList = [];
+		for (var i = 0; i < contentArr.length; i++) {
+			if (contentArr[i].indexOf("?") > -1) {
+				var tempArr = contentArr[i].split("*");
+				var hanlin = new Object();
+				hanlin.title = tempArr[0];
+				hanlin.url = tempArr[1];
+				hanlin.thumbUp = tempArr[2];
+				hanlinList.push(hanlin);
+			}
+		}
+		console.log(hanlinList);
+		$.ajax({
+			url : "/do/hanlin",
+			type : "POST",
+			data : JSON.stringify(hanlinList),
+			async : false,
+			contentType : "application/json",
+			dataType : "json"
+		}).done(function(data) {
+			console.log(data);
+		});
+	});
+	$.ajax({
+		url : "/do/hanlin",
+		type : "GET",
+		data : null,
+		async : false,
+		dataType : "json"
+	}).done(function(data) {
+		console.log(data);
+		var html = "";
+		for (var i = 0; i < data.length; i++) {
+			html += "<div>" + data[i].title + "</div>";
+			html += "<div>" + data[i].thumbUp + " : " + data[i].url + "</div>";
+		}
+		$("#list").html(html);
+	});
+</script>
+</html>
