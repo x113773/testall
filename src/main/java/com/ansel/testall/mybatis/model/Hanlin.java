@@ -13,6 +13,8 @@ public class Hanlin {
 	private Integer thumbUp;
 	
 	private Date createDate;
+	
+	private String createDateStr;
 
 	public String getId() {
 		return id;
@@ -52,6 +54,14 @@ public class Hanlin {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
 	}
 
 }

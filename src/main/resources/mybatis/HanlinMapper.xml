@@ -19,7 +19,13 @@
 		<if test="title != null">
 			where title = #{title,jdbcType=VARCHAR}
 		</if>
-		order by thumb_up desc
+		<if test="thumbUp != null">
+			order by thumb_up desc
+		</if>
+		<if test="createDate != null">
+			order by CREATE_DATE desc,thumb_up desc
+		</if>
+
 	</select>
 	<insert id="insertSelective" parameterType="com.ansel.testall.mybatis.model.Hanlin">
 		insert into Hanlin

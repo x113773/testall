@@ -16,6 +16,7 @@
 	<button id="doAjaxRequest">submit</button>
 	<br />
 	<br />
+	<button id="byDate">by date</button>
 	<div id="list" style="margin-left:311px;"></div>
 	<br />
 	<br />
@@ -46,22 +47,38 @@
 			dataType : "json"
 		}).done(function(data) {
 			console.log(data);
+			getHanlinList("date");
 		});
 	});
-	$.ajax({
-		url : "/do/hanlin",
-		type : "GET",
-		data : null,
-		async : false,
-		dataType : "json"
-	}).done(function(data) {
-		console.log(data);
-		var html = "";
-		for (var i = 0; i < data.length; i++) {
-			html += "<div>" + data[i].title + "</div>";
-			html += "<div>" + data[i].thumbUp + " : " + data[i].url + "</div>";
-		}
-		$("#list").html(html);
+
+	$("#byDate").click(function() {
+		getHanlinList("date");
 	});
+
+	getHanlinList("thumbUp");
+	function getHanlinList(orderType) {
+		$
+				.ajax({
+					url : "/do/hanlin/" + orderType,
+					type : "GET",
+					data : null,
+					async : false,
+					dataType : "json"
+				})
+				.done(
+						function(data) {
+							console.log(data);
+							var html = "";
+							for (var i = 0; i < data.length; i++) {
+								html += "<div>" + data[i].createDateStr + " : "
+										+ data[i].title + "</div>";
+								html += "<div>"
+										+ data[i].thumbUp
+										+ " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: "
+										+ data[i].url + "</div>";
+							}
+							$("#list").html(html);
+						});
+	}
 </script>
 </html>
