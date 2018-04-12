@@ -9,17 +9,109 @@
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta content="" name="description" />
 <meta content="" name="author" />
+
+<!-- END THEME LAYOUT STYLES -->
+<style>
+.table td, .table th {
+	padding-left: 30px !important;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+a:link {
+	color: blue !important;
+} /* 未访问的链接 */
+a:visited {
+	color: green !important;
+} /* 已访问的链接 */
+a:hover {
+	color: red !important;
+} /* 鼠标移动到链接上 */
+a:active {
+	color: yellow !important;
+} /* 选定的链接，即鼠标按下去的时候不松开显示的状态 */
+.title {
+	-webkit-user-select: auto !important;
+	-moz-user-select: auto !important;
+	-ms-user-select: auto !important;
+	user-select: auto !important;
+}
+.date {
+	 width:78px;
+}
+
+p#back-to-top {
+	position: fixed;
+	bottom: 100px;
+	right: 80px;
+}
+
+p#back-to-top a {
+	text-align: center;
+	text-decoration: none;
+	color: #d1d1d1;
+	display: block;
+	width: 30px;
+	/*使用CSS3中的transition属性给跳转链接中的文字添加渐变效果*/
+	-moz-transition: color1s;
+	-webkit-transition: color1s;
+	-o-transition: color1s;
+}
+
+p#back-to-top a:hover {
+	color: #979797;
+}
+
+p#back-to-top a span {
+	background: #d1d1d1 url(../images/arrow_up.png) no-repeat center center;
+	border-radius: 6px;
+	display: block;
+	height: 30px;
+	width: 30px;
+	margin-bottom: 5px;
+	/*使用CSS3中的transition属性给<span>标签背景颜色添加渐变效果*/
+	-moz-transition: background1s;
+	-webkit-transition: background1s;
+	-o-transition: background1s;
+}
+</style>
+
 </head>
 <body>
 	<h1>hello world!</h1>
 	<textarea rows="20" cols="200" id="content"></textarea>
-	<button id="doAjaxRequest">submit</button>
+	<button style="margin-left:111px;" id="doAjaxRequest">导入</button>
 	<br />
 	<br />
-	<button id="byDate">by date</button>
-	<div id="list" style="margin-left:311px;"></div>
+	<button style="margin-left:200px;" id="createDate">创建日期</button>
+	<button id="updateDate">更新日期</button>
+	<button id="thumbUp">总赞数</button>
+	<button id="cthumb">比上次导入</button>
+	<button id="cfirst">比首次导入</button>
 	<br />
 	<br />
+	<table style="margin-left:50px;" class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_2">
+		<thead id="thead">
+			<tr>
+				<th>当前</th>
+				<th>比首次</th>
+				<th>比上次</th>
+				<th class="date">创建日期</th>
+				<th class="date">更新日期</th>
+				<th class="title">标题</th>
+			</tr>
+		</thead>
+		<tbody class="table-tbody" id="tbody">
+		</tbody>
+	</table>
+	<div id="list" style="margin-left:200px;"></div>
+	<br />
+	<br />
+	<p id="back-to-top">
+		<a href="#top"><span>☂</span></a>
+	</p>
 </body>
 <script src="frame/jquery.min.js"></script>
 <script type="text/javascript">
@@ -33,7 +125,10 @@
 				var hanlin = new Object();
 				hanlin.title = tempArr[0];
 				hanlin.url = tempArr[1];
+				hanlin.first = tempArr[2];
 				hanlin.thumbUp = tempArr[2];
+				hanlin.cfirst = 0;
+				hanlin.cthumb = 0;
 				hanlinList.push(hanlin);
 			}
 		}
@@ -47,38 +142,71 @@
 			dataType : "json"
 		}).done(function(data) {
 			console.log(data);
-			getHanlinList("date");
+			getHanlinList("createDate");
 		});
 	});
 
-	$("#byDate").click(function() {
-		getHanlinList("date");
+	$("#createDate").click(function() {
+		getHanlinList("createDate");
+	});
+	$("#updateDate").click(function() {
+		getHanlinList("updateDate");
+	});
+	$("#thumbUp").click(function() {
+		getHanlinList("thumbUp");
+	});
+	$("#cthumb").click(function() {
+		getHanlinList("cthumb");
+	});
+	$("#cfirst").click(function() {
+		getHanlinList("cfirst");
 	});
 
 	getHanlinList("thumbUp");
 	function getHanlinList(orderType) {
-		$
-				.ajax({
-					url : "/do/hanlin/" + orderType,
-					type : "GET",
-					data : null,
-					async : false,
-					dataType : "json"
-				})
-				.done(
-						function(data) {
-							console.log(data);
-							var html = "";
-							for (var i = 0; i < data.length; i++) {
-								html += "<div>" + data[i].createDateStr + " : "
-										+ data[i].title + "</div>";
-								html += "<div>"
-										+ data[i].thumbUp
-										+ " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: "
-										+ data[i].url + "</div>";
-							}
-							$("#list").html(html);
-						});
+		$.ajax({
+			url : "/do/hanlin/" + orderType,
+			type : "GET",
+			data : null,
+			async : false,
+			dataType : "json"
+		}).done(function(data) {
+			console.log(data);
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				//html += "<div>创建于: " + data[i].createDateStr + "&nbsp; 更新于: " + data[i].updateDateStr + "  " + data[i].title + "</div>";
+				//html += "<div>当前:" + data[i].thumbUp + "&nbsp;&nbsp;&nbsp;&nbsp; 比首次: " + data[i].cfirst + "&nbsp;&nbsp;&nbsp;&nbsp; 比上次: " + data[i].cthumb + " <a href="+data[i].url +">" + data[i].url + "</a></div>";
+				html += "<tr><td>" + data[i].thumbUp + "</td><td>" + data[i].cfirst + "</td><td>" + data[i].cthumb + "</td><td class='date'>" + data[i].createDateStr + "</td><td class='date'>";
+				html += data[i].updateDateStr + "</td><td class='title'><div>" + data[i].title + "</div><div>" + " <a href="+data[i].url +">" + data[i].url + "</a></div></td></tr>";
+
+			}
+			//$("#list").html(html);
+			$("#tbody").html(html);
+		});
 	}
 </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//首先将#back-to-top隐藏
+		$("#back-to-top").hide();
+		//当滚动条的位置处于距顶部600像素以下时，跳转链接出现，否则消失
+		$(function() {
+			$(window).scroll(function() {
+				if ($(window).scrollTop() > 600) {
+					$("#back-to-top").fadeIn(500);
+				} else {
+					$("#back-to-top").fadeOut(500);
+				}
+			});
+			//当点击跳转链接后，回到页面顶部位置
+			$("#back-to-top").click(function() {
+				$('body,html').animate({
+					scrollTop : 0
+				}, 300);
+				return false;
+			});
+		});
+	});
+</script>
+
 </html>

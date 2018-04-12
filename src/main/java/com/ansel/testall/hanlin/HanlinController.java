@@ -24,16 +24,24 @@ public class HanlinController {
 	@RequestMapping(value = "/do/hanlin/{orderType}", method = RequestMethod.GET)
 	public List<Hanlin> getHanlin(@PathVariable String orderType) {
 		Hanlin hl = new Hanlin();
-		if ("date".equals(orderType)) {
+		if ("createDate".equals(orderType)) {
 			hl.setCreateDate(new Date());
-		} else {
+		} else if ("updateDate".equals(orderType)) {
+			hl.setUpdateDate(new Date());
+		} else if ("thumbUp".equals(orderType)) {
 			hl.setThumbUp(1);
+		} else if ("cthumb".equals(orderType)) {
+			hl.setCthumb(1);
+		} else if ("cfirst".equals(orderType)) {
+			hl.setCfirst(1);
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
 		List<Hanlin> hanlinList = hanlinService.selectByHanlin(hl);
 		for (int i = 0; i < hanlinList.size(); i++) {
-			hanlinList.get(i).setCreateDateStr(
-					sdf.format(hanlinList.get(i).getCreateDate()));
+			hanlinList.get(i).setCreateDateStr(sdf.format(hanlinList.get(i).getCreateDate()));
+			if (hanlinList.get(i).getUpdateDate() != null) {
+				hanlinList.get(i).setUpdateDateStr(sdf.format(hanlinList.get(i).getUpdateDate()));
+			}
 		}
 		return hanlinList;
 	}
@@ -41,10 +49,18 @@ public class HanlinController {
 	@RequestMapping(value = "/do/hanlin", method = RequestMethod.POST)
 	public String insertHanlin(@RequestBody List<Hanlin> hanlinList) {
 		for (Hanlin hl : hanlinList) {
-			List<Hanlin> tmList = hanlinService.selectByHanlin(hl);
+			Hanlin temp = new Hanlin();
+			temp.setUrl(hl.getUrl());
+			List<Hanlin> tmList = hanlinService.selectByHanlin(temp);
 			if (tmList.size() == 0) {
 				hl.setId(SystemUtil.getUuid());
 				hanlinService.insertSelective(hl);
+			} else {
+				Hanlin hanlin = tmList.get(0);
+				hanlin.setCthumb(hl.getThumbUp() - hanlin.getThumbUp());
+				hanlin.setCfirst(hl.getFirst() - hanlin.getFirst());
+				hanlin.setThumbUp(hl.getThumbUp());
+				hanlinService.updateByPrimaryKeySelective(hanlin);
 			}
 		}
 		return "201";

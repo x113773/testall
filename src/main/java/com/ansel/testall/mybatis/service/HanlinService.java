@@ -9,4 +9,6 @@ public interface HanlinService {
 	void insertSelective(Hanlin hanlin);
 
 	List<Hanlin> selectByHanlin(Hanlin hl);
+
+	void updateByPrimaryKeySelective(Hanlin hl);
 }

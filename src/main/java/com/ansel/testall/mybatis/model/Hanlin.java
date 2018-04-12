@@ -11,10 +11,20 @@ public class Hanlin {
 	private String url;
 
 	private Integer thumbUp;
-	
+
 	private Date createDate;
-	
+
 	private String createDateStr;
+
+	private Date updateDate;
+
+	private String updateDateStr;
+
+	private Integer first;
+
+	private Integer cfirst;
+
+	private Integer cthumb;
 
 	public String getId() {
 		return id;
@@ -62,6 +72,46 @@ public class Hanlin {
 
 	public void setCreateDateStr(String createDateStr) {
 		this.createDateStr = createDateStr;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUpdateDateStr() {
+		return updateDateStr;
+	}
+
+	public void setUpdateDateStr(String updateDateStr) {
+		this.updateDateStr = updateDateStr;
+	}
+
+	public Integer getFirst() {
+		return first;
+	}
+
+	public void setFirst(Integer first) {
+		this.first = first;
+	}
+
+	public Integer getCfirst() {
+		return cfirst;
+	}
+
+	public void setCfirst(Integer cfirst) {
+		this.cfirst = cfirst;
+	}
+
+	public Integer getCthumb() {
+		return cthumb;
+	}
+
+	public void setCthumb(Integer cthumb) {
+		this.cthumb = cthumb;
 	}
 
 }

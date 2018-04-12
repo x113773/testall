@@ -10,4 +10,6 @@ public interface HanlinMapper {
 	void insertSelective(Hanlin hanlin);
 
 	List<Hanlin> selectByHanlin(Hanlin hanlin);
+
+	void updateByPrimaryKeySelective(Hanlin hanlin);
 }

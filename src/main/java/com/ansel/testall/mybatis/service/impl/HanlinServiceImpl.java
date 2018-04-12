@@ -27,4 +27,9 @@ public class HanlinServiceImpl implements HanlinService {
 		return hanlinMapper.selectByHanlin(hanlin);
 	}
 
+	@Override
+	public void updateByPrimaryKeySelective(Hanlin hanlin) {
+		hanlinMapper.updateByPrimaryKeySelective(hanlin);
+	}
+
 }

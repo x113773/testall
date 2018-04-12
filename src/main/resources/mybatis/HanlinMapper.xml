@@ -7,17 +7,22 @@
 		<result column="url" jdbcType="VARCHAR" property="url" />
 		<result column="thumb_up" jdbcType="INTEGER" property="thumbUp" />
 		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="FIRST" jdbcType="INTEGER" property="first" />
+		<result column="CFIRST" jdbcType="INTEGER" property="cfirst" />
+		<result column="CTHUMB" jdbcType="INTEGER" property="cthumb" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, title, url,thumb_up,CREATE_DATE
+		ID, TITLE, URL, THUMB_UP, CREATE_DATE, UPDATE_DATE, FIRST,
+		CFIRST, CTHUMB
 	</sql>
 	<select id="selectByHanlin" parameterType="com.ansel.testall.mybatis.model.Hanlin"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from Hanlin
-		<if test="title != null">
-			where title = #{title,jdbcType=VARCHAR}
+		<if test="url != null">
+			where url = #{url,jdbcType=VARCHAR}
 		</if>
 		<if test="thumbUp != null">
 			order by thumb_up desc
@@ -25,28 +30,47 @@
 		<if test="createDate != null">
 			order by CREATE_DATE desc,thumb_up desc
 		</if>
+		<if test="updateDate != null">
+			order by UPDATE_DATE desc,cfirst desc
+		</if>
+		<if test="cthumb != null">
+			order by cthumb desc
+		</if>
+		<if test="cfirst != null">
+			order by cfirst desc
+		</if>
 
 	</select>
+
 	<insert id="insertSelective" parameterType="com.ansel.testall.mybatis.model.Hanlin">
-		insert into Hanlin
+		insert into HANLIN
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
-				id,
+				ID,
 			</if>
 			<if test="title != null">
-				title,
+				TITLE,
 			</if>
 			<if test="url != null">
-				url,
+				URL,
 			</if>
 			<if test="thumbUp != null">
-				thumb_up,
+				THUMB_UP,
 			</if>
-			CREATE_DATE
+			CREATE_DATE,UPDATE_DATE,
+			<if test="first != null">
+				FIRST,
+			</if>
+			<if test="cfirst != null">
+				CFIRST,
+			</if>
+			<if test="cthumb != null">
+				CTHUMB,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
-				#{id,jdbcType=INTEGER},
+				#{id,jdbcType=CHAR},
 			</if>
 			<if test="title != null">
 				#{title,jdbcType=VARCHAR},
@@ -57,8 +81,45 @@
 			<if test="thumbUp != null">
 				#{thumbUp,jdbcType=INTEGER},
 			</if>
-			sysdate
+			sysdate, sysdate,
+			<if test="first != null">
+				#{first,jdbcType=INTEGER},
+			</if>
+			<if test="cfirst != null">
+				#{cfirst,jdbcType=INTEGER},
+			</if>
+			<if test="cthumb != null">
+				#{cthumb,jdbcType=INTEGER},
+			</if>
 		</trim>
 	</insert>
 
+	<update id="updateByPrimaryKeySelective" parameterType="com.ansel.testall.mybatis.model.Hanlin">
+		update HANLIN
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="thumbUp != null">
+				THUMB_UP = #{thumbUp,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			UPDATE_DATE = sysdate,
+			<if test="first != null">
+				FIRST = #{first,jdbcType=INTEGER},
+			</if>
+			<if test="cfirst != null">
+				CFIRST = #{cfirst,jdbcType=INTEGER},
+			</if>
+			<if test="cthumb != null">
+				CTHUMB = #{cthumb,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=CHAR}
+	</update>
 </mapper>
