@@ -38,8 +38,9 @@ a:active {
 	-ms-user-select: auto !important;
 	user-select: auto !important;
 }
+
 .date {
-	 width:78px;
+	width: 78px;
 }
 
 p#back-to-top {
@@ -120,11 +121,15 @@ p#back-to-top a span {
 		var contentArr = content.split("-");
 		var hanlinList = [];
 		for (var i = 0; i < contentArr.length; i++) {
-			if (contentArr[i].indexOf("?") > -1) {
+			if (contentArr[i].indexOf("http") > -1) {
 				var tempArr = contentArr[i].split("*");
 				var hanlin = new Object();
 				hanlin.title = tempArr[0];
-				hanlin.url = tempArr[1];
+				if (tempArr[1].indexOf("?") > -1) {
+					hanlin.url = tempArr[1];
+				} else {
+					hanlin.url = tempArr[1] + "?from=feed"
+				}
 				hanlin.first = tempArr[2];
 				hanlin.thumbUp = tempArr[2];
 				hanlin.cfirst = 0;
@@ -185,6 +190,7 @@ p#back-to-top a span {
 		});
 	}
 </script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		//首先将#back-to-top隐藏
