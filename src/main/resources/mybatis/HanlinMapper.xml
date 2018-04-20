@@ -16,14 +16,28 @@
 		ID, TITLE, URL, THUMB_UP, CREATE_DATE, UPDATE_DATE, FIRST,
 		CFIRST, CTHUMB
 	</sql>
-	<select id="selectByHanlin" parameterType="com.ansel.testall.mybatis.model.Hanlin"
-		resultMap="BaseResultMap">
+	<select id="selectByHanlin" parameterType="map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from Hanlin
-		<if test="url != null">
-			where url = #{url,jdbcType=VARCHAR}
-		</if>
+		<where>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR}
+			</if>
+			<if test="thumbUpMin != null">
+				and <![CDATA[thumb_up >= #{thumbUpMin,jdbcType=INTEGER}]]>
+			</if>
+			<if test="thumbUpMax != null">
+				and <![CDATA[thumb_up <= #{thumbUpMax,jdbcType=INTEGER}]]>
+			</if>
+			<if test="createDateMin != null">
+				and <![CDATA[CREATE_DATE >= TO_DATE(#{createDateMin},'yyyy-mm-dd hh24:mi:ss')]]>
+			</if>
+			<if test="createDateMax != null">
+				and <![CDATA[CREATE_DATE <= TO_DATE(#{createDateMax},'yyyy-mm-dd hh24:mi:ss')]]>
+			</if>
+		</where>
+
 		<if test="thumbUp != null">
 			order by thumb_up desc
 		</if>
@@ -122,4 +136,9 @@
 		</set>
 		where ID = #{id,jdbcType=CHAR}
 	</update>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from HANLIN
+		where ID = #{id,jdbcType=CHAR}
+	</delete>
 </mapper>

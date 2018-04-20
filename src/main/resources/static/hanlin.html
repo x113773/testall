@@ -84,6 +84,13 @@ p#back-to-top a span {
 	<h1>hello world!</h1>
 	<textarea rows="20" cols="200" id="content"></textarea>
 	<button style="margin-left:111px;" id="doAjaxRequest">导入</button>
+	<span id="thisTime"> </span>
+	<br />
+	<br />
+	<input style="margin-left:200px;" type="text" id="createDateMin" name="createDateMin" placeholder="最小创建日期" onclick="createTime();">
+	<input type="text" id="createDateMax" name="createDateMax" placeholder="最大创建日期" onclick="createTime();">
+	<input type="text" id="thumbUpMin" name="thumbUpMin" placeholder="最小赞数">
+	<input type="text" id="thumbUpMax" name="thumbUpMax" placeholder="最大赞数">
 	<br />
 	<br />
 	<button style="margin-left:200px;" id="createDate">创建日期</button>
@@ -100,8 +107,8 @@ p#back-to-top a span {
 				<th>比首次</th>
 				<th>比上次</th>
 				<th class="date">创建日期</th>
-				<th class="date">更新日期</th>
-				<th class="title">标题</th>
+				<th class="date" id="date">更新日期</th>
+				<th class="title" id="title">标题</th>
 			</tr>
 		</thead>
 		<tbody class="table-tbody" id="tbody">
@@ -115,6 +122,7 @@ p#back-to-top a span {
 	</p>
 </body>
 <script src="frame/jquery.min.js"></script>
+<script src="frame/metronic/global/plugins/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$("#doAjaxRequest").click(function() {
 		var content = $("#content").val();
@@ -125,11 +133,7 @@ p#back-to-top a span {
 				var tempArr = contentArr[i].split("*");
 				var hanlin = new Object();
 				hanlin.title = tempArr[0];
-				if (tempArr[1].indexOf("?") > -1) {
-					hanlin.url = tempArr[1];
-				} else {
-					hanlin.url = tempArr[1] + "?from=feed"
-				}
+				hanlin.url = tempArr[1].substr(0, 55);
 				hanlin.first = tempArr[2];
 				hanlin.thumbUp = tempArr[2];
 				hanlin.cfirst = 0;
@@ -146,7 +150,7 @@ p#back-to-top a span {
 			contentType : "application/json",
 			dataType : "json"
 		}).done(function(data) {
-			console.log(data);
+			$("#thisTime").html("本次：" + hanlinList.length);
 			getHanlinList("createDate");
 		});
 	});
@@ -166,13 +170,18 @@ p#back-to-top a span {
 	$("#cfirst").click(function() {
 		getHanlinList("cfirst");
 	});
-
+	$("#thumbUpMin,#thumbUpMax,#createDateMin,#createDateMax").val("")
 	getHanlinList("thumbUp");
 	function getHanlinList(orderType) {
 		$.ajax({
 			url : "/do/hanlin/" + orderType,
 			type : "GET",
-			data : null,
+			data : {
+				thumbUpMin : $("#thumbUpMin").val(),
+				thumbUpMax : $("#thumbUpMax").val(),
+				createDateMin : $("#createDateMin").val(),
+				createDateMax : $("#createDateMax").val()
+			},
 			async : false,
 			dataType : "json"
 		}).done(function(data) {
@@ -187,6 +196,13 @@ p#back-to-top a span {
 			}
 			//$("#list").html(html);
 			$("#tbody").html(html);
+			$("#title").html("标题，条数：" + data.length);
+		});
+	}
+
+	function createTime() {
+		WdatePicker({
+			dateFmt : 'yyyy-MM-dd HH:mm:ss'
 		});
 	}
 </script>

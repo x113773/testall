@@ -1,6 +1,7 @@
 package com.ansel.testall.mybatis.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,18 @@ public class HanlinServiceImpl implements HanlinService {
 	}
 
 	@Override
-	public List<Hanlin> selectByHanlin(Hanlin hanlin) {
-		return hanlinMapper.selectByHanlin(hanlin);
+	public List<Hanlin> selectByHanlin(Map<String, Object> param) {
+		return hanlinMapper.selectByHanlin(param);
 	}
 
 	@Override
 	public void updateByPrimaryKeySelective(Hanlin hanlin) {
 		hanlinMapper.updateByPrimaryKeySelective(hanlin);
+	}
+
+	@Override
+	public void deleteByPrimaryKey(String id) {
+		hanlinMapper.deleteByPrimaryKey(id);
 	}
 
 }
