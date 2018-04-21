@@ -65,12 +65,14 @@ public class HanlinController {
 
 	@RequestMapping(value = "/do/hanlin", method = RequestMethod.POST)
 	public String insertHanlin(@RequestBody List<Hanlin> hanlinList) {
+		Integer count =0;
 		for (Hanlin hl : hanlinList) {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("url", hl.getUrl());
 			List<Hanlin> tmList = hanlinService.selectByHanlin(param);
 			if (tmList.size() == 0) {
 				hl.setId(SystemUtil.getUuid());
+				count++;
 				hanlinService.insertSelective(hl);
 			} else {
 				Hanlin hanlin = tmList.get(0);
@@ -86,7 +88,7 @@ public class HanlinController {
 
 			}
 		}
-		return "201";
+		return count.toString();
 	}
 
 	@RequestMapping(value = "/qc", method = RequestMethod.GET)
