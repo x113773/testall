@@ -82,8 +82,8 @@ p#back-to-top a span {
 </head>
 <body>
 	<h1>hello world!</h1>
-	<textarea rows="20" cols="200" id="content"></textarea>
-	<button style="margin-left:111px;" id="doAjaxRequest">导入</button>
+	<textarea rows="20" cols="170" id="content"></textarea>
+	<button style="margin-left:111px;width: 100px;height: 50px;" id="doAjaxRequest">导入</button>
 	<span id="thisTime"> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<span id="thisTimeReal"> </span>
 	<br />
@@ -228,7 +228,7 @@ p#back-to-top a span {
 		return fmt;
 
 	}
-	document.getElementById('createDateMin').value = new Date(new Date().setHours(-2*24)).Format("yyyy-MM-dd hh:mm:ss")
+	document.getElementById('createDateMin').value = new Date(new Date().setHours(-2 * 24)).Format("yyyy-MM-dd hh:mm:ss")
 	getHanlinList("thumbUp");
 </script>
 
