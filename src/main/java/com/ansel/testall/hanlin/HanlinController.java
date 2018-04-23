@@ -65,7 +65,7 @@ public class HanlinController {
 
 	@RequestMapping(value = "/do/hanlin", method = RequestMethod.POST)
 	public String insertHanlin(@RequestBody List<Hanlin> hanlinList) {
-		Integer count =0;
+		Integer count = 0;
 		for (Hanlin hl : hanlinList) {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("url", hl.getUrl());
@@ -78,9 +78,9 @@ public class HanlinController {
 				Hanlin hanlin = tmList.get(0);
 				if (hl.getThumbUp() > hanlin.getThumbUp()) {
 					long day = (new Date().getTime() - hanlin.getCreateDate().getTime()) / (1000);
-					if (day > 60) {
+					if (day > 60 * 10) {
 						hanlin.setCthumb(hl.getThumbUp() - hanlin.getThumbUp());
-						hanlin.setCfirst(hl.getFirst() - hanlin.getFirst());
+						hanlin.setCfirst(hl.getThumbUp() - hanlin.getFirst());
 					}
 					hanlin.setThumbUp(hl.getThumbUp());
 					hanlinService.updateByPrimaryKeySelective(hanlin);

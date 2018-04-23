@@ -84,7 +84,8 @@ p#back-to-top a span {
 	<h1>hello world!</h1>
 	<textarea rows="20" cols="200" id="content"></textarea>
 	<button style="margin-left:111px;" id="doAjaxRequest">导入</button>
-	<span id="thisTime"> </span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="thisTimeReal"> </span>
+	<span id="thisTime"> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span id="thisTimeReal"> </span>
 	<br />
 	<br />
 	<input style="margin-left:200px;" type="text" id="createDateMin" name="createDateMin" placeholder="最小创建日期" onclick="createTime();">
@@ -152,6 +153,7 @@ p#back-to-top a span {
 		}).done(function(data) {
 			$("#thisTime").html("本次：" + hanlinList.length);
 			$("#thisTimeReal").html("实际：" + data);
+			$("#content").val("");
 			getHanlinList("createDate");
 		});
 	});
@@ -172,7 +174,7 @@ p#back-to-top a span {
 		getHanlinList("cfirst");
 	});
 	$("#thumbUpMin,#thumbUpMax,#createDateMin,#createDateMax").val("")
-	getHanlinList("thumbUp");
+
 	function getHanlinList(orderType) {
 		$.ajax({
 			url : "/do/hanlin/" + orderType,
@@ -206,6 +208,28 @@ p#back-to-top a span {
 			dateFmt : 'yyyy-MM-dd HH:mm:ss'
 		});
 	}
+
+	Date.prototype.Format = function(fmt) {
+		var o = {
+			"M+" : this.getMonth() + 1, // 月份
+			"d+" : this.getDate(), // 日
+			"h+" : this.getHours(), // 小时
+			"m+" : this.getMinutes(), // 分
+			"s+" : this.getSeconds(), // 秒
+			"q+" : Math.floor((this.getMonth() + 3) / 3), // 季度
+			"S" : this.getMilliseconds()
+		// 毫秒
+		};
+		if (/(y+)/.test(fmt))
+			fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+		for ( var k in o)
+			if (new RegExp("(" + k + ")").test(fmt))
+				fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+		return fmt;
+
+	}
+	document.getElementById('createDateMin').value = new Date(new Date().setHours(-2*24)).Format("yyyy-MM-dd hh:mm:ss")
+	getHanlinList("thumbUp");
 </script>
 
 <script type="text/javascript">
