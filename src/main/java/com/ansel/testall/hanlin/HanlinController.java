@@ -81,6 +81,8 @@ public class HanlinController {
 					if (day > 60 * 10) {
 						hanlin.setCthumb(hl.getThumbUp() - hanlin.getThumbUp());
 						hanlin.setCfirst(hl.getThumbUp() - hanlin.getFirst());
+					} else {
+						hanlin.setFirst(hl.getThumbUp());
 					}
 					hanlin.setThumbUp(hl.getThumbUp());
 					hanlinService.updateByPrimaryKeySelective(hanlin);
