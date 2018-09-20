@@ -25,7 +25,9 @@ public class HanlinController {
 	HanlinService hanlinService;
 
 	@RequestMapping(value = "/do/hanlin/{orderType}", method = RequestMethod.GET)
-	public List<Hanlin> getHanlin(@PathVariable String orderType, String thumbUpMin, String thumbUpMax, String createDateMin, String createDateMax) {
+	public List<Hanlin> getHanlin(@PathVariable String orderType,
+			String thumbUpMin, String thumbUpMax, String createDateMin,
+			String createDateMax) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if ("createDate".equals(orderType)) {
 			param.put("createDate", "createDate");
@@ -55,9 +57,11 @@ public class HanlinController {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
 		List<Hanlin> hanlinList = hanlinService.selectByHanlin(param);
 		for (int i = 0; i < hanlinList.size(); i++) {
-			hanlinList.get(i).setCreateDateStr(sdf.format(hanlinList.get(i).getCreateDate()));
+			hanlinList.get(i).setCreateDateStr(
+					sdf.format(hanlinList.get(i).getCreateDate()));
 			if (hanlinList.get(i).getUpdateDate() != null) {
-				hanlinList.get(i).setUpdateDateStr(sdf.format(hanlinList.get(i).getUpdateDate()));
+				hanlinList.get(i).setUpdateDateStr(
+						sdf.format(hanlinList.get(i).getUpdateDate()));
 			}
 		}
 		return hanlinList;
@@ -77,7 +81,8 @@ public class HanlinController {
 			} else {
 				Hanlin hanlin = tmList.get(0);
 				if (hl.getThumbUp() > hanlin.getThumbUp()) {
-					long day = (new Date().getTime() - hanlin.getCreateDate().getTime()) / (1000);
+					long day = (new Date().getTime() - hanlin.getCreateDate()
+							.getTime()) / (1000);
 					if (day > 60 * 10) {
 						hanlin.setCthumb(hl.getThumbUp() - hanlin.getThumbUp());
 						hanlin.setCfirst(hl.getThumbUp() - hanlin.getFirst());
@@ -93,6 +98,31 @@ public class HanlinController {
 		return count.toString();
 	}
 
+	@RequestMapping(value = "/tag", method = RequestMethod.GET)
+	public List<Hanlin> getTag() {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("url", "https://p.baidu.com/itopic/main/tag?tid=");
+		List<Hanlin> hanlinList = hanlinService.selectByHanlin(param);
+		return hanlinList;
+	}
+
+	@RequestMapping(value = "/tag", method = RequestMethod.POST)
+	public void updateTag(Integer tagId, Integer tagAdd) {
+		Hanlin hanlin = new Hanlin();
+		hanlin.setId("00000000000000000000000000000000");
+		hanlin.setThumbUp(tagId + tagAdd);
+		hanlin.setFirst(tagAdd);
+		hanlinService.updateByPrimaryKeySelective(hanlin);
+	}
+	
+	@RequestMapping(value = "/tag2", method = RequestMethod.POST)
+	public void updateTag2(String mark) {
+		Hanlin hanlin = new Hanlin();
+		hanlin.setId("00000000000000000000000000000000");
+		hanlin.setTitle(mark);
+		hanlinService.updateByPrimaryKeySelective(hanlin);
+	}
+
 	@RequestMapping(value = "/qc", method = RequestMethod.GET)
 	public List<String> qc() {
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -102,15 +132,18 @@ public class HanlinController {
 		List<String> idList = new ArrayList<String>();
 		for (int i = 0; i < hanlinList.size(); i++) {
 			if (tempHanlinMap.containsKey(hanlinList.get(i).getUrl())) {
-				Hanlin hl = (Hanlin) tempHanlinMap.get(hanlinList.get(i).getUrl());
+				Hanlin hl = (Hanlin) tempHanlinMap.get(hanlinList.get(i)
+						.getUrl());
 				if (hanlinList.get(i).getThumbUp() > hl.getThumbUp()) {
 					idList.add(hl.getId());
-					tempHanlinMap.put(hanlinList.get(i).getUrl(), hanlinList.get(i));
+					tempHanlinMap.put(hanlinList.get(i).getUrl(),
+							hanlinList.get(i));
 				} else {
 					idList.add(hanlinList.get(i).getId());
 				}
 			} else {
-				tempHanlinMap.put(hanlinList.get(i).getUrl(), hanlinList.get(i));
+				tempHanlinMap
+						.put(hanlinList.get(i).getUrl(), hanlinList.get(i));
 			}
 		}
 		for (int i = 0; i < idList.size(); i++) {

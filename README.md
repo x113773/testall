@@ -43,3 +43,5 @@ Springboot集成MyBatis的两种方式，详见[这里](https://github.com/x1137
 
 - [Swagger](https://github.com/x113773/testall/tree/master/src/main/java/com/ansel/testall/swagger)
 是一款接口文档在线自动生成及测试软件(可以当postman用)，详细介绍见[这里](https://swagger.io/docs/specification/what-is-swagger/)，springboot集成实例见[这里](https://github.com/x113773/testall/issues/5)
+
+- [ZipEntry](https://github.com/x113773/testall/blob/master/src/main/java/com/ansel/testall/zip)：多文件压缩下载，详细介绍见[这里](https://github.com/x113773/testall/issues/23)
