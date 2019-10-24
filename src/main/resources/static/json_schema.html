@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+
+<!-- END HEAD -->
+<body class=" ">
+	<div>
+		<textarea class=" " name="parameterContentLeft" id="parameterContentLeft" placeholder="请输入请求报文内容"></textarea>
+	</div>
+	<br>
+	<button onclick="setAjaxRequest();" id="doJson" class=" ">发送</button>
+	<div class=" ">
+		<pre id="responsePre">
+
+        </pre>
+	</div>
+	<script src="frame/jquery.min.js"></script>
+	<script>
+		function setAjaxRequest() {
+			$.ajax({
+				url : "/json-schema/validate",
+				type : "GET",
+				data : {
+					jsonStr : $("#parameterContentLeft").val()
+				},
+				async : false
+			}).done(function(data) {
+				$("#responsePre").html(data.message);
+			});
+		}
+	</script>
+</body>
+
+</html>

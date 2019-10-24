@@ -1,0 +1,20 @@
+---
+- hosts: all
+
+  tasks:
+
+  - name: remove old war file #删除从服务器上旧的war包
+    shell: cd {{ war_file_path }}&&rm -rf {{ project_name }}.war
+
+  - name: copy new war file #拷贝主服务器上的war包到从服务器指定目录
+    copy: src={{ local_war_file }} dest={{ war_file_path }}
+
+  - name: start weblogic service #调用shell脚本，传入指定参数，完成启停服务、部署项目
+    script: "/etc/ansible/start_weblogic.sh {{ user_name }} {{ password }}
+     {{ weblogic_path }} {{ domain_name }} {{ server_name }} {{ admin_url }}
+     {{ war_file_path }} {{ project_name }}"
+  
+
+
+
+
