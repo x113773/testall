@@ -9,11 +9,11 @@ import java.util.Map;
 import org.apache.axis.AxisProperties;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class AxisController {
 
 	@RequestMapping(value = "/axis", method = RequestMethod.GET)

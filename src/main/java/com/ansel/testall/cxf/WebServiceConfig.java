@@ -37,12 +37,12 @@ public class WebServiceConfig {
      * 注册CXFWebService接口到webservice服务
      * @return
      */
-    @Bean(name = "WebServiceDemoEndpoint")
+    @Bean(name = "CXFWebServiceEndpoint")
     public Endpoint sweptPayEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(springBus(), cXFWebService);
         endpoint.publish("/doSomething");
         return endpoint;
     }
- 
+
 }
 

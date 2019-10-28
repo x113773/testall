@@ -5,7 +5,7 @@ import javax.jws.WebService;
 import org.springframework.stereotype.Service;
  
 @Service
-@WebService(serviceName = "WebServiceDemoService", // 与接口中指定的name一致
+@WebService(serviceName = "CXFWebService", // 与接口中指定的name一致
         targetNamespace = "http://cxf.testall.ansel.com/"// 与接口中的命名空间一致,一般是接口的包名倒
 )
 public class CXFWebServiceImpl implements CXFWebService {
